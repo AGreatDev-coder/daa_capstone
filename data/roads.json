@@ -1,0 +1,17 @@
+[
+  { "u": "DEPOT", "v": "LOC_A", "distance": 4.0 },
+  { "u": "DEPOT", "v": "LOC_B", "distance": 6.0 },
+  { "u": "DEPOT", "v": "LOC_C", "distance": 9.0 },
+  { "u": "LOC_A", "v": "LOC_B", "distance": 3.0 },
+  { "u": "LOC_A", "v": "LOC_D", "distance": 5.0 },
+  { "u": "LOC_B", "v": "LOC_C", "distance": 2.5 },
+  { "u": "LOC_B", "v": "LOC_E", "distance": 7.0 },
+  { "u": "LOC_C", "v": "LOC_E", "distance": 3.0 },
+  { "u": "LOC_C", "v": "LOC_F", "distance": 6.0 },
+  { "u": "LOC_D", "v": "LOC_E", "distance": 4.5 },
+  { "u": "LOC_D", "v": "LOC_G", "distance": 8.0 },
+  { "u": "LOC_E", "v": "LOC_F", "distance": 3.5 },
+  { "u": "LOC_E", "v": "LOC_G", "distance": 4.0 },
+  { "u": "LOC_F", "v": "LOC_G", "distance": 5.0 }
+]
+

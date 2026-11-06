@@ -1,0 +1,400 @@
+ANTIGRAVITY PROJECT INSTRUCTIONS PROJECT: MINI-COURIER PLANNER COURSE:
+DESIGN & ANALYSIS OF ALGORITHMS (ETCCDA302) UNIVERSITY: K.R. MANGALAM
+UNIVERSITY
+
+============================================================ 1. YOUR
+ROLE ============================================================
+
+Act as a senior Python developer and DAA project mentor. Build a
+complete, working, well-structured Python application named
+“Mini-Courier Planner” based strictly on the capstone assignment
+requirements described in this file.
+
+The project is an individual, coding-based DAA assignment. The purpose
+is to demonstrate the implementation and understanding of: 1. A sorting
+algorithm for parcel prioritization. 2. Dynamic Programming using the
+0/1 Knapsack problem for vehicle packing. 3. Dijkstra’s algorithm for
+shortest paths in a weighted graph. 4. Nearest Neighbor approximation
+for the Travelling Salesman Problem (TSP). 5. Runtime/performance
+testing on datasets of different sizes.
+
+Do not turn this into a MERN, React, Node.js, or web-development
+project. Python is compulsory. Build a clear Python application first. A
+GUI is not required by the assignment; prefer a reliable,
+easy-to-demonstrate command-line application unless there is a strong
+reason otherwise.
+
+============================================================ 2. PROBLEM
+TO SOLVE ============================================================
+
+Build a prototype courier-planning system that accepts parcel
+information and delivery locations, then produces: - Parcels ordered by
+delivery priority/deadline. - An optimal parcel selection for one trip
+under a vehicle weight capacity, using 0/1 Knapsack DP. - Shortest paths
+between delivery points using Dijkstra’s algorithm. - An overall
+delivery visit sequence using the Nearest Neighbor TSP approximation. -
+Total route distance and performance measurements for major algorithmic
+steps.
+
+The system should make it easy to understand how each algorithm
+contributes to the final courier plan.
+
+============================================================ 3.
+FUNCTIONAL REQUIREMENTS
+============================================================
+
+A. INPUT / DATA MODEL
+
+Create sample datasets for parcels and locations.
+
+Each parcel should contain, at minimum: - parcel_id -
+destination/location_id - weight - value (or clearly defined delivery
+benefit) - priority - deadline
+
+Each location should have: - location_id - location_name
+
+Represent roads/routes as a weighted graph. Each edge must contain a
+non-negative distance. Use a consistent distance unit, preferably
+kilometres.
+
+Validate input: - Weight and capacity must be positive or zero as
+appropriate. - Parcel value must be non-negative. - Distances must be
+non-negative because Dijkstra’s algorithm is being used. - Location IDs
+referenced by parcels and graph edges must exist. - Handle empty data
+and invalid user input gracefully.
+
+Use JSON or another simple, documented data format for sample data. Keep
+sample data separate from algorithm code.
+
+B. PARCEL PRIORITIZATION — SORTING
+
+Implement a sorting algorithm to arrange parcels by priority and/or
+delivery deadline.
+
+Recommended primary implementation: Merge Sort.
+
+Define and document the sorting rule clearly. For example: - Higher
+priority first. - For equal priority, earlier deadline first. - Use
+parcel ID as a final deterministic tie-breaker if needed.
+
+Do not rely only on Python’s built-in sorted() for the required
+algorithm implementation. The sorting logic itself must be implemented
+and demonstrated.
+
+Show the sorted parcel list in the output.
+
+C. VEHICLE PACKING — 0/1 KNAPSACK USING DYNAMIC PROGRAMMING
+
+Implement 0/1 Knapsack using a DP table.
+
+Inputs: - Parcels (weight and value/benefit). - Vehicle maximum weight
+capacity.
+
+Rules: - A parcel is either selected completely or not selected. - A
+parcel cannot be selected more than once. - Total selected weight must
+not exceed capacity. - Maximize total selected value/benefit.
+
+Return and display: - Selected parcel IDs. - Total selected weight. -
+Total selected value. - Vehicle capacity. - DP table or a readable
+representation/evidence of the DP computation.
+
+Explain the DP state, recurrence, base case, and reconstruction of
+selected parcels in the documentation.
+
+Important integration rule: The assignment asks for parcels to be
+prioritized and then selected for one delivery trip. Make the
+relationship explicit in the program. Do not silently claim that sorting
+changes the mathematical optimum of 0/1 Knapsack. Use the sorted parcel
+list as the consistent input order for the DP implementation, and
+explain that Knapsack determines the maximum-value feasible subset.
+
+D. ROUTE GRAPH — DIJKSTRA’S ALGORITHM
+
+Build a weighted, undirected graph by default, unless the data model
+explicitly requires directed roads.
+
+Implement Dijkstra’s algorithm yourself. Do not replace the required
+implementation with a library shortest-path function.
+
+The implementation should: - Accept a source node. - Calculate shortest
+distances to all reachable nodes. - Store predecessor information. -
+Reconstruct a shortest path to a requested destination. - Handle
+unreachable destinations clearly.
+
+Display shortest path and total distance for relevant delivery
+locations.
+
+E. COMPLETE DELIVERY ROUTE — NEAREST NEIGHBOR TSP APPROXIMATION
+
+Implement the Nearest Neighbor heuristic for a complete delivery tour.
+
+Expected behavior: 1. Start from the warehouse/depot. 2. Select the
+nearest unvisited delivery location. 3. Mark it visited. 4. Repeat until
+all required delivery locations have been visited. 5. Return to the
+warehouse/depot if a return trip is part of the defined scenario.
+
+Important: - Nearest Neighbor is an approximation/heuristic; do not
+claim it always finds the optimal TSP route. - Use Dijkstra
+shortest-path distances between locations as the distance matrix for the
+TSP visit-order calculation when the road graph does not directly
+contain every pair of locations. - Preserve the actual shortest path
+segments when displaying the final route, not just the order of location
+names. - Handle disconnected graphs. If a required location cannot be
+reached, report it clearly rather than inventing a route. - Avoid
+visiting the same delivery location multiple times except where
+shortest-path segments naturally pass through an already visited node. -
+Clearly state whether the final route returns to the warehouse.
+
+Display: - Ordered delivery locations. - Expanded route/path, where
+possible. - Total route distance in kilometres. - Any unreachable
+locations or route limitations.
+
+============================================================ 4. PROJECT
+INTEGRATION ============================================================
+
+Create one main application entry point that connects all modules in
+this order:
+
+1.  Load and validate parcel/location/graph data.
+2.  Display parcel information.
+3.  Run Merge Sort to prioritize parcels.
+4.  Run 0/1 Knapsack to select parcels within vehicle capacity.
+5.  Identify the delivery locations associated with selected parcels.
+6.  Run Dijkstra to calculate shortest-path distances between relevant
+    locations.
+7.  Run Nearest Neighbor TSP approximation to determine the delivery
+    visit order.
+8.  Expand the visit order into actual shortest path segments.
+9.  Display the complete courier plan.
+10. Run performance tests and show or save results.
+
+If multiple selected parcels have the same destination, visit that
+destination only once in the route.
+
+Make the depot/warehouse configurable in the sample data or application
+settings.
+
+============================================================ 5.
+PERFORMANCE TESTING — REQUIRED PHASE 4
+============================================================
+
+Test the main algorithms using multiple input sizes, such as: - Small
+dataset: approximately 10 parcels/locations as appropriate. - Medium
+dataset: approximately 100 items. - Large dataset: approximately 500
+items or a size that is practical for the graph and TSP demonstration.
+
+Do not make unrealistic performance claims. Record actual execution
+times.
+
+Use Python’s time.perf_counter() for timing. Keep timing separate from
+file loading and user input where possible.
+
+Measure the major components separately: - Sorting. - Knapsack DP. -
+Dijkstra / shortest-path calculations. - Nearest Neighbor route
+construction.
+
+For fair testing: - Use repeatable generated datasets or fixed sample
+datasets. - Explain what each input size represents. - Run algorithms on
+valid data. - Avoid including print statements inside timed sections. -
+If an algorithm becomes expensive at larger sizes, document the reason
+and use sensible test sizes.
+
+Save performance results in a CSV file and create a runtime chart if
+practical. Use matplotlib if a chart is generated. Include axis labels,
+title, units, and a legend where needed.
+
+Add a short analysis explaining how runtime changes as input size
+increases and what improvements could be considered.
+
+============================================================ 6.
+SUGGESTED PROJECT STRUCTURE
+============================================================
+
+Use a modular structure similar to:
+
+Mini-Courier-Planner/ | |– main.py |– README.md |– requirements.txt | |–
+data/ | |– parcels.json | |– locations.json | |– roads.json | |–
+algorithms/ | |– sorting.py | |– knapsack.py | |– dijkstra.py | |–
+tsp.py | |– init.py | |– utils/ | |– data_loader.py | |– validation.py |
+|– performance.py | |– init.py | |– results/ | |–
+performance_results.csv | |– runtime_chart.png | |– screenshots/ | |–
+docs/ | |– design.md | |– complexity_analysis.md | |– test_cases.md | |–
+tests/ |– test_sorting.py |– test_knapsack.py |– test_dijkstra.py |–
+test_tsp.py
+
+You may adjust the structure if necessary, but keep algorithm
+implementations separate, readable, and easy to locate.
+
+============================================================ 7. CODE
+QUALITY RULES
+============================================================
+
+-   Use Python 3.
+-   Write clean, modular, readable code.
+-   Add meaningful comments and docstrings explaining logic.
+-   Use descriptive variable and function names.
+-   Do not write the entire project in one huge file.
+-   Do not use built-in shortcuts in place of the required algorithm
+    implementations.
+-   Use standard Python libraries wherever possible.
+-   Avoid unnecessary dependencies.
+-   Do not add AI/ML, APIs, databases, authentication, payment systems,
+    maps APIs, or unrelated features. They are not required for this
+    assignment.
+-   Do not hardcode final outputs. Calculate them from the input data.
+-   Ensure the project runs from a fresh setup using the instructions in
+    README.md.
+
+============================================================ 8. TESTING
+AND CORRECTNESS
+============================================================
+
+Create test cases for every algorithm, including edge cases.
+
+Sorting: - Already sorted input. - Reverse-sorted input. - Equal
+priorities/deadlines. - Empty and single-item input.
+
+Knapsack: - Empty parcel list. - Zero capacity. - Parcel heavier than
+capacity. - Multiple parcels with equal values. - Case where selecting
+no parcel is valid.
+
+Dijkstra: - Simple connected graph. - Multiple possible paths. -
+Unreachable node. - Single node. - Zero-weight edge, if supported.
+
+TSP Nearest Neighbor: - One delivery location. - Multiple locations. - A
+graph where the heuristic is not optimal. - Disconnected/unreachable
+locations. - Return-to-depot behavior.
+
+Verify: - Selected parcel weight never exceeds capacity. - Every
+selected parcel appears at most once. - Every required reachable
+delivery location is included in the route. - Route distance equals the
+sum of its path-segment distances. - No negative edge weights are
+accepted for Dijkstra. - Output is deterministic for the same input.
+
+Use unit tests (preferably unittest or pytest). Include commands to run
+them.
+
+============================================================ 9.
+DOCUMENTATION AND SUBMISSION EVIDENCE
+============================================================
+
+The assignment requires a complete project submission through file
+upload or an accessible GitHub repository. Prepare:
+
+1.  Source code for all modules.
+2.  README.md with project overview, setup, execution, data format, and
+    sample output.
+3.  Design explanation and system workflow.
+4.  Explanation of each algorithm and why it is used.
+5.  Time and space complexity of each implemented algorithm.
+6.  Sample datasets.
+7.  Test cases and correctness evidence.
+8.  Screenshots of program execution.
+9.  Runtime results in CSV.
+10. Runtime chart and performance analysis.
+11. Limitations and possible future improvements.
+
+Map the documentation to the five assignment phases:
+
+PHASE 1 — Courier Problem Design and Planning: Problem definition,
+parcel attributes, graph format, algorithm selection, workflow.
+
+PHASE 2 — Package Prioritization and Box Filling: Sorting
+implementation, DP table/output, selected parcels and packing plan.
+
+PHASE 3 — Route Maker and Graph Processing: Graph representation,
+Dijkstra shortest paths, Nearest Neighbor TSP route and total distance.
+
+PHASE 4 — Performance Testing and Optimization: Test datasets, runtime
+measurements, charts, comparisons and improvement suggestions.
+
+PHASE 5 — Final Report and Demonstration: Screenshots, output traces,
+documentation, execution steps and final demonstration notes.
+
+============================================================ 10. VIVA
+PREPARATION ============================================================
+
+Prepare a viva section in the documentation with concise answers and
+examples for: - How the sorting algorithm works. - Why the chosen
+sorting algorithm was selected. - What Dynamic Programming is. - 0/1
+Knapsack state, recurrence and table construction. - Why a parcel cannot
+be selected more than once. - How Dijkstra works. - Why Dijkstra
+requires non-negative edge weights. - Difference between shortest path
+and TSP. - How Nearest Neighbor chooses the next location. - Why Nearest
+Neighbor does not guarantee an optimal TSP tour. - Time and space
+complexity of every algorithm. - How runtime was measured. - How the
+system handles invalid or unreachable data.
+
+The student must be able to explain and trace the code. Do not produce
+code that is unnecessarily complicated or impossible for a B.Tech
+student to understand.
+
+============================================================ 11.
+DEVELOPMENT WORKFLOW — FOLLOW THIS STRICTLY
+============================================================
+
+Do not generate the entire project blindly in one step.
+
+Work in stages:
+
+STAGE 1: Inspect the existing workspace. If the assignment document is
+present, read it. Confirm the project requirements and propose the file
+structure. Do not delete or overwrite unrelated existing files.
+
+STAGE 2: Create the data model, sample datasets, validation, and project
+structure.
+
+STAGE 3: Implement and test Merge Sort.
+
+STAGE 4: Implement and test 0/1 Knapsack DP.
+
+STAGE 5: Implement and test Dijkstra.
+
+STAGE 6: Implement and test Nearest Neighbor TSP using Dijkstra
+distances.
+
+STAGE 7: Integrate all modules into main.py and run the complete sample
+workflow.
+
+STAGE 8: Implement performance testing, CSV export, and runtime chart.
+
+STAGE 9: Complete README, design notes, complexity analysis, test cases,
+screenshots, and viva preparation.
+
+STAGE 10: Run the full test suite and the application from the
+documented commands. Fix errors before declaring the project complete.
+
+At the end of each stage: - State which files were created or
+modified. - Explain what was implemented in simple language. - Show the
+command used to test/run it. - Report test results honestly. - Mention
+any incomplete requirement.
+
+Do not claim a feature works unless you have actually run and tested it.
+
+============================================================ 12. FINAL
+ACCEPTANCE CHECKLIST
+============================================================
+
+Before finishing, verify all of the following:
+
+[ ] Python application runs successfully. [ ] Parcel data is loaded and
+validated. [ ] Required sorting algorithm is implemented manually. [ ]
+Parcel priority/deadline ordering is demonstrated. [ ] 0/1 Knapsack is
+implemented using a DP table. [ ] Selected parcels and total
+weight/value are displayed. [ ] Weighted graph is represented correctly.
+[ ] Dijkstra is implemented manually and reconstructs paths. [ ] Nearest
+Neighbor TSP approximation is implemented manually. [ ] Dijkstra
+distances are used appropriately for route planning. [ ] Final route and
+total distance are displayed. [ ] Unreachable locations are handled. [ ]
+Multiple dataset sizes are tested. [ ] Runtime measurements are saved. [
+] Runtime chart is generated, if supported by the environment. [ ] Unit
+tests pass. [ ] README contains correct setup and execution commands. [
+] Complexity analysis is documented. [ ] Screenshots/output evidence are
+saved. [ ] All five assignment phases are addressed. [ ] Student-facing
+explanations and viva questions are included.
+
+FINAL INSTRUCTION: Prioritize correctness, clarity, explainability, and
+compliance with the K.R. Mangalam University DAA Capstone Assignment.
+Build a working academic project, not an unnecessarily complex
+commercial courier platform. Keep every algorithm visible and
+independently understandable.

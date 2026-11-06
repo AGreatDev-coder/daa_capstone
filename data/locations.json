@@ -1,0 +1,43 @@
+[
+  {
+    "location_id": "DEPOT",
+    "location_name": "Central Distribution Hub",
+    "is_depot": true
+  },
+  {
+    "location_id": "LOC_A",
+    "location_name": "Sector 1 - Academic Block",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_B",
+    "location_name": "Sector 2 - Science & Research Park",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_C",
+    "location_name": "Sector 3 - Technology Center",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_D",
+    "location_name": "Sector 4 - Residential Township",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_E",
+    "location_name": "Sector 5 - Commercial Market",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_F",
+    "location_name": "Sector 6 - Medical Complex",
+    "is_depot": false
+  },
+  {
+    "location_id": "LOC_G",
+    "location_name": "Sector 7 - Sports Arena",
+    "is_depot": false
+  }
+]
+

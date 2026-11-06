@@ -1,0 +1,138 @@
+﻿
+================================================================================
+                    MINI-COURIER PLANNER (DAA CAPSTONE)
+              Algorithmic Parcel Dispatch and Route Optimization
+================================================================================
+
+--------------------------------------------------------------------------------
+ [PHASE 1] DATA LOADING & INTEGRITY VERIFICATION
+--------------------------------------------------------------------------------
+[*] Depot Location         : DEPOT
+[*] Total Locations Loaded : 8
+[*] Total Road Nodes       : 8
+[*] Total Parcels Loaded   : 10
+
+Parcel ID  | Destination | Weight (kg)  | Value (Rs)   | Priority   | Deadline (hrs)
+------------------------------------------------------------------------------
+P01        | LOC_A      | 3.0          | 45.0         | 4          | 2.0           
+P02        | LOC_B      | 5.0          | 80.0         | 5          | 1.5           
+P03        | LOC_C      | 4.0          | 50.0         | 3          | 4.0           
+P04        | LOC_D      | 2.0          | 35.0         | 2          | 5.0           
+P05        | LOC_E      | 6.0          | 95.0         | 5          | 2.5           
+P06        | LOC_B      | 3.5          | 60.0         | 4          | 3.0           
+P07        | LOC_F      | 7.0          | 110.0        | 4          | 3.5           
+P08        | LOC_G      | 8.0          | 100.0        | 3          | 6.0           
+P09        | LOC_A      | 1.5          | 30.0         | 5          | 1.0           
+P10        | LOC_E      | 4.5          | 70.0         | 2          | 4.5           
+------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ [PHASE 2A] PARCEL PRIORITIZATION (ALGORITHM: MERGE SORT)
+ Rule: Higher Priority -> Earlier Deadline -> Deterministic ID Tie-breaker
+--------------------------------------------------------------------------------
+[+] Total Divide-and-Conquer Comparisons Performed: 23
+
+Rank   | Parcel ID  | Destination | Priority   | Deadline   | Weight   | Value   
+--------------------------------------------------------------------------
+1      | P09        | LOC_A      | 5          | 1.0        | 1.5      | 30.0    
+2      | P02        | LOC_B      | 5          | 1.5        | 5.0      | 80.0    
+3      | P05        | LOC_E      | 5          | 2.5        | 6.0      | 95.0    
+4      | P01        | LOC_A      | 4          | 2.0        | 3.0      | 45.0    
+5      | P06        | LOC_B      | 4          | 3.0        | 3.5      | 60.0    
+6      | P07        | LOC_F      | 4          | 3.5        | 7.0      | 110.0   
+7      | P03        | LOC_C      | 3          | 4.0        | 4.0      | 50.0    
+8      | P08        | LOC_G      | 3          | 6.0        | 8.0      | 100.0   
+9      | P10        | LOC_E      | 2          | 4.5        | 4.5      | 70.0    
+10     | P04        | LOC_D      | 2          | 5.0        | 2.0      | 35.0    
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ [PHASE 2B] VEHICLE PACKING (ALGORITHM: 0/1 KNAPSACK DYNAMIC PROGRAMMING)
+ Vehicle Maximum Weight Capacity: 25.0 kg
+--------------------------------------------------------------------------------
+[+] Optimal Subset Selected   : ['P09', 'P02', 'P05', 'P06', 'P07', 'P04']
+[+] Total Packed Weight        : 25.0 / 25.0 kg (100.0% capacity utilized)
+[+] Total Delivery Value Earned: Rs. 410.00
+
+Selected Parcels Breakdown:
+Parcel ID  | Destination | Weight (kg)  | Value (Rs)   | Priority
+------------------------------------------------------------
+P09        | LOC_A      | 1.5          | 30.0         | 5       
+P02        | LOC_B      | 5.0          | 80.0         | 5       
+P05        | LOC_E      | 6.0          | 95.0         | 5       
+P06        | LOC_B      | 3.5          | 60.0         | 4       
+P07        | LOC_F      | 7.0          | 110.0        | 4       
+P04        | LOC_D      | 2.0          | 35.0         | 2       
+------------------------------------------------------------
+
+Dynamic Programming Table (Sample Output):
+Item     |    w=0.0 |    w=2.0 |    w=4.0 |    w=6.0 |    w=8.0 |   w=10.0 |   w=12.0 |   w=14.0 |   w=16.0 |   w=18.0 |   w=20.0 |   w=22.0 |   w=24.0 |   w=25.0
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Base (0) |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0 |      0.0
+Item 1   |      0.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0 |     30.0
+Item 2   |      0.0 |     30.0 |     30.0 |     80.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0 |    110.0
+Item 3   |      0.0 |     30.0 |     30.0 |     95.0 |    125.0 |    125.0 |    175.0 |    205.0 |    205.0 |    205.0 |    205.0 |    205.0 |    205.0 |    205.0
+Item 4   |      0.0 |     30.0 |     45.0 |     95.0 |    125.0 |    155.0 |    175.0 |    220.0 |    250.0 |    250.0 |    250.0 |    250.0 |    250.0 |    250.0
+Item 5   |      0.0 |     30.0 |     60.0 |     95.0 |    135.0 |    170.0 |    185.0 |    230.0 |    265.0 |    280.0 |    310.0 |    310.0 |    310.0 |    310.0
+Item 6   |      0.0 |     30.0 |     60.0 |     95.0 |    135.0 |    170.0 |    200.0 |    230.0 |    265.0 |    295.0 |    325.0 |    345.0 |    375.0 |    390.0
+Item 7   |      0.0 |     30.0 |     60.0 |     95.0 |    135.0 |    170.0 |    200.0 |    230.0 |    265.0 |    295.0 |    325.0 |    345.0 |    375.0 |    390.0
+Item 8   |      0.0 |     30.0 |     60.0 |     95.0 |    135.0 |    170.0 |    200.0 |    230.0 |    265.0 |    295.0 |    325.0 |    345.0 |    375.0 |    390.0
+Item 9   |      0.0 |     30.0 |     60.0 |    100.0 |    135.0 |    170.0 |    200.0 |    230.0 |    265.0 |    295.0 |    325.0 |    350.0 |    385.0 |    395.0
+Item 10  |      0.0 |     35.0 |     65.0 |    100.0 |    135.0 |    170.0 |    205.0 |    235.0 |    265.0 |    300.0 |    330.0 |    360.0 |    385.0 |    410.0
+
+
+--------------------------------------------------------------------------------
+ [PHASE 3A] DELIVERY DESTINATIONS EXTRACTION
+--------------------------------------------------------------------------------
+Unique Delivery Stops Required (5 stops):
+  - Location 'LOC_A': Delivers parcel(s) ['P09']
+  - Location 'LOC_B': Delivers parcel(s) ['P02', 'P06']
+  - Location 'LOC_D': Delivers parcel(s) ['P04']
+  - Location 'LOC_E': Delivers parcel(s) ['P05']
+  - Location 'LOC_F': Delivers parcel(s) ['P07']
+
+--------------------------------------------------------------------------------
+ [PHASE 3B] SHORTEST PATH ANALYSIS (ALGORITHM: DIJKSTRA'S ALGORITHM)
+ Source Depot: 'DEPOT'
+--------------------------------------------------------------------------------
+Target Destination   | Shortest Distance  | Shortest Path Trajectory           
+------------------------------------------------------------------------------
+LOC_A                | 4.00 km            | DEPOT -> LOC_A                     
+LOC_B                | 6.00 km            | DEPOT -> LOC_B                     
+LOC_D                | 9.00 km            | DEPOT -> LOC_A -> LOC_D            
+LOC_E                | 11.50 km           | DEPOT -> LOC_B -> LOC_C -> LOC_E   
+LOC_F                | 14.50 km           | DEPOT -> LOC_B -> LOC_C -> LOC_F   
+------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ [PHASE 3C] DELIVERY TOUR SEQUENCING (ALGORITHM: NEAREST NEIGHBOR TSP)
+ Approximation heuristic with Dijkstra distance matrix
+--------------------------------------------------------------------------------
+[*] Planned Stop Order : DEPOT -> LOC_A -> LOC_B -> LOC_E -> LOC_F -> LOC_D -> DEPOT
+[*] Expanded Road Path : DEPOT -> LOC_A -> LOC_B -> LOC_C -> LOC_E -> LOC_F -> LOC_E -> LOC_D -> LOC_A -> DEPOT
+[*] Total Trip Distance: 33.00 km
+[*] Returned to Depot  : True
+
+Detailed Leg Breakdown:
+Leg   | From       | To         | Distance   | Road Path Segment                  
+---------------------------------------------------------------------------
+1     | DEPOT      | LOC_A      | 4.00       | DEPOT -> LOC_A                     
+2     | LOC_A      | LOC_B      | 3.00       | LOC_A -> LOC_B                     
+3     | LOC_B      | LOC_E      | 5.50       | LOC_B -> LOC_C -> LOC_E            
+4     | LOC_E      | LOC_F      | 3.50       | LOC_E -> LOC_F                     
+5     | LOC_F      | LOC_D      | 8.00       | LOC_F -> LOC_E -> LOC_D            
+6     | LOC_D      | DEPOT      | 9.00       | LOC_D -> LOC_A -> DEPOT            
+---------------------------------------------------------------------------
+
+=================================================================================
+                           FINAL COURIER DISPATCH MANIFEST
+=================================================================================
+ Vehicle Capacity       : 25.0 kg
+ Total Weight Loaded    : 25.0 kg (100.0% utilized)
+ Total Parcels Loaded   : 6
+ Total Delivery Revenue : Rs. 410.00
+ Total Travel Distance  : 33.00 km
+ Planned Tour Sequence  : DEPOT -> LOC_A -> LOC_B -> LOC_E -> LOC_F -> LOC_D -> DEPOT
+ Expanded Road Segments : DEPOT -> LOC_A -> LOC_B -> LOC_C -> LOC_E -> LOC_F -> LOC_E -> LOC_D -> LOC_A -> DEPOT
+=================================================================================
+

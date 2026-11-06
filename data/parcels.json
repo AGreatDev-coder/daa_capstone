@@ -1,0 +1,83 @@
+[
+  {
+    "parcel_id": "P01",
+    "destination_id": "LOC_A",
+    "weight": 3.0,
+    "value": 45.0,
+    "priority": 4,
+    "deadline": 2.0
+  },
+  {
+    "parcel_id": "P02",
+    "destination_id": "LOC_B",
+    "weight": 5.0,
+    "value": 80.0,
+    "priority": 5,
+    "deadline": 1.5
+  },
+  {
+    "parcel_id": "P03",
+    "destination_id": "LOC_C",
+    "weight": 4.0,
+    "value": 50.0,
+    "priority": 3,
+    "deadline": 4.0
+  },
+  {
+    "parcel_id": "P04",
+    "destination_id": "LOC_D",
+    "weight": 2.0,
+    "value": 35.0,
+    "priority": 2,
+    "deadline": 5.0
+  },
+  {
+    "parcel_id": "P05",
+    "destination_id": "LOC_E",
+    "weight": 6.0,
+    "value": 95.0,
+    "priority": 5,
+    "deadline": 2.5
+  },
+  {
+    "parcel_id": "P06",
+    "destination_id": "LOC_B",
+    "weight": 3.5,
+    "value": 60.0,
+    "priority": 4,
+    "deadline": 3.0
+  },
+  {
+    "parcel_id": "P07",
+    "destination_id": "LOC_F",
+    "weight": 7.0,
+    "value": 110.0,
+    "priority": 4,
+    "deadline": 3.5
+  },
+  {
+    "parcel_id": "P08",
+    "destination_id": "LOC_G",
+    "weight": 8.0,
+    "value": 100.0,
+    "priority": 3,
+    "deadline": 6.0
+  },
+  {
+    "parcel_id": "P09",
+    "destination_id": "LOC_A",
+    "weight": 1.5,
+    "value": 30.0,
+    "priority": 5,
+    "deadline": 1.0
+  },
+  {
+    "parcel_id": "P10",
+    "destination_id": "LOC_E",
+    "weight": 4.5,
+    "value": 70.0,
+    "priority": 2,
+    "deadline": 4.5
+  }
+]
+
