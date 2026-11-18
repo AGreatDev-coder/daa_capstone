@@ -22,14 +22,58 @@ The **Mini-Courier Planner** is an algorithmic courier dispatch and route planni
 
 ---
 
+## ⚡ Quick Start: How to Run
+
+### 1. 🌐 Interactive Web Dashboard (Streamlit)
+Launch the graphical browser interface with real-time visual road network graph, interactive vehicle capacity sliders, dynamic knapsack packing, and route tour animations:
+```bash
+python -m streamlit run app.py
+```
+*(Alternative shortcut if streamlit is in your PATH: `streamlit run app.py`)*  
+> Once started, your web browser will automatically open at: **`http://localhost:8501`**
+
+---
+
+### 2. 💻 Standard Terminal Run (CLI Pipeline)
+Run the complete academic pipeline directly in your terminal:
+```bash
+python main.py
+```
+
+#### Common CLI Options:
+- **Detailed Step-by-Step Diagnostics (Verbose Mode & DP Table):**
+  ```bash
+  python main.py --verbose
+  ```
+- **Custom Vehicle Capacity (e.g. 30 kg payload):**
+  ```bash
+  python main.py --capacity 30.0
+  ```
+- **One-Way Delivery (Do not return to depot):**
+  ```bash
+  python main.py --no-return
+  ```
+- **Run the 40-Test Verification Suite:**
+  ```bash
+  python -m unittest discover -s tests -p "test_*.py" -v
+  ```
+- **Run the Performance Benchmark Suite ($N=10$ to $500$):**
+  ```bash
+  python main.py --benchmark
+  ```
+
+---
+
 ## 2. Project Architecture & Directory Structure
 
 ```
 Mini-Courier-Planner/
 │
+├── app.py                      # Interactive Streamlit Web Dashboard
 ├── main.py                     # Primary CLI application entry point
 ├── README.md                   # Comprehensive project documentation
-├── requirements.txt            # Python dependencies (matplotlib)
+├── requirements.txt            # Python dependencies (matplotlib, streamlit, networkx)
+├── .gitignore                  # Git ignore rules (clean repository)
 │
 ├── data/                       # Sample datasets (JSON format)
 │   ├── locations.json          # 8 City sectors & Central Distribution Hub
